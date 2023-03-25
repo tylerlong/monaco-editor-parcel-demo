@@ -1,5 +1,11 @@
 @import '../node_modules/antd/dist/reset.css';
 
-body {
-  padding: 1rem;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body > div {
+  height: 100%;
 }
