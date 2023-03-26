@@ -3,19 +3,10 @@
 
 import { join } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
+import { run } from 'shell-commands';
 
-const filePath = join(
-  __dirname,
-  '..',
-  'node_modules',
-  'monaco-editor',
-  'esm',
-  'vs',
-  'base',
-  'common',
-  'marked',
-  'marked.js',
-);
+const baseDir = join('.', 'node_modules', 'monaco-editor', 'esm', 'vs');
+const filePath = join(baseDir, 'base', 'common', 'marked', 'marked.js');
 const content = readFileSync(filePath, 'utf-8');
 const lines = content.split('\n');
 const index = lines.findIndex(
@@ -25,3 +16,5 @@ const temp = lines[index - 1];
 lines[index - 1] = lines[index];
 lines[index] = temp;
 writeFileSync(filePath, lines.join('\n'));
+
+run(`yarn parcel build ${join(baseDir, 'language', 'typescript', 'ts.worker.js')} --dist-dir docs`);
