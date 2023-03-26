@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.main.js';
+import { editor as monaco } from 'monaco-editor';
 
 self.MonacoEnvironment = {
   getWorkerUrl: function () {
@@ -6,7 +6,7 @@ self.MonacoEnvironment = {
   },
 };
 
-monaco.editor.create(document.getElementById('container'), {
+monaco.create(document.getElementById('container')!, {
   value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-  language: 'javascript',
+  language: 'typescript',
 });
